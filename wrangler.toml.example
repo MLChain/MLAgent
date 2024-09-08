@@ -1,0 +1,21 @@
+name = "mlchain-custom-tool"
+compatibility_date = "2024-07-01"
+
+[vars]
+TOKEN = "bananaiscool"
+OPENAPI_VERSION = "3.1.0"
+TOOL_VERSION = "1.0.0"
+TOOL_NAME = "Mlchain Custom Tool"
+TOOL_DESCRIPTION = "Mlchain Custom Tool"
+
+# [[kv_namespaces]]
+# binding = "MY_KV_NAMESPACE"
+# id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+# [[r2_buckets]]
+# binding = "MY_BUCKET"
+# bucket_name = "my-bucket"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "MY_DB"
+database_id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
