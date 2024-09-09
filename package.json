@@ -1,15 +1,39 @@
 {
+  "name": "mlagent",
+  "private": true,
   "scripts": {
-    "dev": "wrangler dev src/index.ts",
-    "deploy": "wrangler deploy --minify src/index.ts"
+    "build": "turbo build",
+    "bump": "depsynky bump && pnpm -w install",
+    "test": "pnpm vitest --run",
+    "check:type": "pnpm -r --stream check:type",
+    "check:format": "prettier --check .",
+    "fix:format": "prettier --write .",
+    "check:lint": "eslint ./ --ext .ts --ext .tsx",
+    "fix:lint": "eslint --fix ./ --ext .ts --ext .tsx",
+    "check:dep": "depsynky check",
+    "fix:dep": "depsynky sync",
+    "check": "pnpm check:dep && pnpm check:format && pnpm check:lint && pnpm check:type",
+    "fix": "pnpm fix:dep && pnpm fix:format && pnpm fix:lint"
   },
   "dependencies": {
-    "@hono/swagger-ui": "^0.3.0",
-    "@hono/zod-openapi": "^0.10.1",
-    "hono": "^4.4.11"
+    "@mlagent/cli": "workspace:*",
+    "@mlagent/sdk": "workspace:^",
+    "@bpinternal/depsynky": "^0.0.1",
+    "@types/node": "^18.11.18",
+    "@typescript-eslint/eslint-plugin": "^5.47.0",
+    "@typescript-eslint/parser": "^5.47.0",
+    "eslint": "^8.30.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jsdoc": "^39.6.4",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-unused-imports": "^2.0.0",
+    "prettier": "^2.8.1",
+    "retry-cli": "^0.7.0",
+    "ts-node": "^10.9.1",
+    "turbo": "^1.13.3",
+    "typescript": "^4.9.4",
+    "vitest": "^0.33.0"
   },
-  "devDependencies": {
-    "@cloudflare/workers-types": "^4.20231218.0",
-    "wrangler": "^3.63.0"
-  }
+  "packageManager": "pnpm@8.6.2"
 }

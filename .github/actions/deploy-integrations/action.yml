@@ -1,0 +1,141 @@
+name: Deploy Integrations
+description: Deploys integrations
+
+input:
+  environment:
+    type: choice
+    description: 'Environment to deploy to'
+    required: true
+    options:
+      - staging
+      - production
+  extra_filter:
+    type: string
+    description: 'Pnpm additional filters to select integrations to deploy'
+    required: false
+    default: ''
+  force:
+    type: boolean
+    description: 'Force re-deploying integrations'
+    default: false
+    required: false
+  sentry_auth_token:
+    description: 'Sentry auth token'
+    required: true
+  token_cloud_ops_account:
+    description: 'Cloud Ops account token'
+    required: true
+  cloud_ops_workspace_id:
+    description: 'Cloud Ops workspace id'
+    required: true
+  gmail_secrets:
+    description: 'Gmail secrets'
+    required: false
+  linear_secrets:
+    description: 'Linear secrets'
+    required: false
+  slack_secrets:
+    description: 'Slack secrets'
+    required: false
+  whatsapp_secrets:
+    description: 'Whatsapp secrets'
+    required: false
+  charts_secrets:
+    description: 'Charts secrets'
+    required: false
+  pdf_secrets:
+    description: 'PDF secrets'
+    required: false
+  browser_secrets:
+    description: 'Browser secrets'
+    required: false
+  openai_secrets:
+    description: 'OpenAI secrets'
+    required: false
+  groq_secrets:
+    description: 'Groq secrets'
+    required: false
+
+runs:
+  using: 'composite'
+  steps:
+    - name: List Sentry Integrations
+      id: list_sentry_integrations
+      shell: bash
+      run: |
+        script_path="./.github/scripts/ls-sentry-integrations.sh"
+        chmod +x $script_path
+        filter=$($script_path)
+        echo "::set-output name=filter::$filter"
+    - name: Inject SourceMaps
+      shell: bash
+      run: pnpm -r --stream ${{ steps.list_sentry_integrations.outputs.filter }} exec sentry-cli sourcemaps inject .mlagent/dist
+    - name: Upload SourceMaps
+      shell: bash
+      run: pnpm -r --stream ${{ steps.list_sentry_integrations.outputs.filter }} exec sentry-cli sourcemaps upload --release=${{ github.sha }} --url-prefix '~' .mlagent/dist
+      env:
+        SENTRY_AUTH_TOKEN: ${{ inputs.sentry_auth_token }}
+        SENTRY_ORG: mlagent-rm
+        SENTRY_RELEASE: ${{ github.sha }}
+    - name: Deploys Integrations
+      env:
+        ENVIRONMENT: ${{ inputs.environment }}
+        TOKEN_CLOUD_OPS_ACCOUNT: ${{ inputs.token_cloud_ops_account }}
+        CLOUD_OPS_WORKSPACE_ID: ${{ inputs.cloud_ops_workspace_id }}
+        SENTRY_RELEASE: ${{ github.sha }}
+        SENTRY_ENVIRONMENT: ${{ inputs.environment }}
+      shell: bash
+      run: |
+        api_url="${{ inputs.environment == 'staging' && 'https://api.mlagent.dev' || 'https://api.mlagent.cloud' }}"
+
+        # login
+
+        echo "### Logging in to $api_url ###"
+        pnpm bp login -y --api-url $api_url --workspaceId "$CLOUD_OPS_WORKSPACE_ID" --token "$TOKEN_CLOUD_OPS_ACCOUNT"
+
+        # deploy
+
+        redeploy=${{ inputs.force == 'true' && 1 || 0 }}
+        all_filters="-F '{integrations/*}' -F '!asana' -F '!trello' -F '!webchat' ${{ inputs.extra_filter }}"
+        list_integrations_cmd="pnpm list $all_filters --json"
+        integration_paths=$(eval $list_integrations_cmd | jq -r "map(".path") | .[]")
+
+        for integration_path in $integration_paths; do
+            integration=$(basename $integration_path)
+            exists=$(./.github/scripts/integration-exists.sh $integration)
+
+            base_command="bp deploy -v -y --noBuild --public"
+            if [ $integration == "gmail" ]; then
+                base_command="$base_command ${{ inputs.gmail_secrets }}"
+            elif [ $integration == "linear" ]; then
+                base_command="$base_command ${{ inputs.linear_secrets }}"
+            elif [ $integration == "slack" ]; then
+                base_command="$base_command ${{ inputs.slack_secrets }}"
+            elif [ $integration == "charts" ]; then
+                base_command="$base_command ${{ inputs.charts_secrets }}"
+            elif [ $integration == "whatsapp" ]; then
+                base_command="$base_command ${{ inputs.whatsapp_secrets }}"
+            elif [ $integration == "pdf-generator" ]; then
+                base_command="$base_command ${{ inputs.pdf_secrets }}"
+            elif [ $integration == "browser" ]; then
+                base_command="$base_command ${{ inputs.browser_secrets }}"
+            elif [ $integration == "openai" ]; then
+                base_command="$base_command ${{ inputs.openai_secrets }}"
+            elif [ $integration == "groq" ]; then
+                base_command="$base_command ${{ inputs.groq_secrets }}"
+            elif [ $integration == "anthropic" ]; then
+                base_command="$base_command ${{ inputs.anthropic_secrets }}"
+            elif [ $integration == "fireworks-ai" ]; then
+                base_command="$base_command ${{ inputs.fireworks_ai_secrets }}"
+            fi
+            
+            if [ $exists -eq 0 ]; then
+                echo -e "\nDeploying integration: ### $integration ###\n"
+                pnpm retry -n 2 -- pnpm -F $integration -c exec -- "$base_command"
+            elif [ $redeploy -eq 1 ]; then
+                echo -e "\nRe-deploying integration: ### $integration ###\n"
+                pnpm retry -n 2 -- pnpm -F $integration -c exec -- "$base_command"
+            else
+                echo -e "\nSkipping integration: ### $integration ###\n"
+            fi
+        done

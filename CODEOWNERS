@@ -1,0 +1,33 @@
+# Global
+* @mlagent/cloud-services
+
+# Scripts
+/scripts @franklevasseur
+
+# Client, SDK, CLI
+/packages @mlagent/cloud-services
+
+# Bots
+/packages/bots @franklevasseur
+
+# Integrations
+/integrations/charts @allardy @mlagent/cloud-services
+/integrations/pdf-generator @lakshya0246 @mlagent/cloud-services
+/integrations/dalle @franklevasseur @mlagent/cloud-services
+/integrations/gmail @michaelmass @mlagent/cloud-services
+/integrations/googlecalendar @franklevasseur @mlagent/cloud-services
+/integrations/groq @AbrahamLopez10 @mlagent/cloud-services
+/integrations/gsheets @franklevasseur @mlagent/cloud-services
+/integrations/intercom @chsir17 @ptrckbp @mlagent/cloud-services
+/integrations/linear @allardy @mlagent/cloud-services
+/integrations/notion @lakshya0246 @mlagent/cloud-services
+/integrations/openai @AbrahamLopez10 @mlagent/cloud-services
+/integrations/slack @michaelmass @mlagent/cloud-services
+/integrations/teams @franklevasseur @mlagent/cloud-services
+/integrations/telegram @franklevasseur @mlagent/cloud-services
+/integrations/twilio @AbrahamLopez10 @mlagent/cloud-services
+/integrations/browser @allardy @mlagent/cloud-services
+/integrations/webhook @franklevasseur @mlagent/cloud-services
+/integrations/whatsapp @AbrahamLopez10 @mlagent/cloud-services
+/integrations/zapier @AbrahamLopez10 @mlagent/cloud-services
+/integrations/zendesk @davidvitora @franklevasseur @mlagent/cloud-services

@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Mlagent V12
+    url: https://github.com/mlchain/v12
+    about: If you're experiencing issues when using the on premise version of Mlagent, please report the issue on the v12 repo.
+  - name: Mlagent Cloud
+    url: https://discord.gg/mlagent
+    about: If you're experiencing issues when using Mlagent Cloud or have any question regarding Mlagent Cloud but you're not sure about the nature of the issue, please report the issue on our Discord Server.

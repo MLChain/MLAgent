@@ -1,0 +1,28 @@
+{
+  "name": "@mlagenthub/github",
+  "private": true,
+  "scripts": {
+    "start": "pnpm bp serve",
+    "build": "pnpm bp build",
+    "deploy": "pnpm bp deploy",
+    "check:type": "tsc --noEmit"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@mlagent/sdk": "workspace:*",
+    "@mlagent/sdk-addons": "workspace:*",
+    "@octokit/webhooks-methods": "^3.0.2",
+    "@octokit/webhooks-types": "^6.10.0",
+    "fuse.js": "^6.6.2",
+    "octokit": "^2.0.19"
+  },
+  "devDependencies": {
+    "@mlagent/cli": "workspace:*",
+    "@mlagent/client": "workspace:*",
+    "@sentry/cli": "^2.18.1",
+    "@types/node": "^18.11.17",
+    "typescript": "^4.9.4"
+  }
+}

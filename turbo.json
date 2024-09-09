@@ -1,0 +1,255 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "pipeline": {
+    "@mlagent/client#generate": {
+      "inputs": ["package.json", "openapi.ts"],
+      "outputs": ["src/gen/**"]
+    },
+    "@mlagent/client#build": {
+      "inputs": ["src/**"],
+      "outputs": ["dist/**"],
+      "dependsOn": ["@mlagent/client#generate"]
+    },
+    "@mlagent/sdk#build": {
+      "inputs": ["src/**"],
+      "outputs": ["dist/**"],
+      "dependsOn": ["@mlagent/client#build"]
+    },
+    "@mlagent/cli#build": {
+      "inputs": ["src/**"],
+      "outputs": ["dist/**"],
+      "dependsOn": ["@mlagent/client#build", "@mlagent/sdk#build"]
+    },
+    "@mlagenthub/anthropic#build": {
+      "inputs": ["integration.definition.ts", "src/**"],
+      "outputs": [".mlagent/**"],
+      "dependsOn": ["@mlagent/client#build", "@mlagent/sdk#build", "@mlagent/cli#build"]
+    },
+    "@mlagenthub/asana#build": {
+      "inputs": ["integration.definition.ts", "src/**"],
+      "outputs": [".mlagent/**"],
+      "dependsOn": ["@mlagent/client#build", "@mlagent/sdk#build", "@mlagent/cli#build"]
+    },
+    "@mlagenthub/charts#build": {
+      "inputs": ["integration.definition.ts", "src/**"],
+      "outputs": [".mlagent/**"],
+      "dependsOn": ["@mlagent/client#build", "@mlagent/sdk#build", "@mlagent/cli#build"]
+    },
+    "@mlagenthub/pdf-generator#build": {
+      "inputs": ["integration.definition.ts", "src/**"],
+      "outputs": [".mlagent/**"],
+      "dependsOn": ["@mlagent/client#build", "@mlagent/sdk#build", "@mlagent/cli#build"]
+    },
+    "@mlagenthub/dalle#build": {
+      "inputs": ["integration.definition.ts", "src/**"],
+      "outputs": [".mlagent/**"],
+      "dependsOn": ["@mlagent/client#build", "@mlagent/sdk#build", "@mlagent/cli#build"]
+    },
+    "@mlagenthub/fireworks-ai#build": {
+      "inputs": ["integration.definition.ts", "src/**"],
+      "outputs": [".mlagent/**"],
+      "dependsOn": ["@mlagent/client#build", "@mlagent/sdk#build", "@mlagent/cli#build"]
+    },
+    "@mlagenthub/github#build": {
+      "inputs": ["integration.definition.ts", "src/**"],
+      "outputs": [".mlagent/**"],
+      "dependsOn": ["@mlagent/client#build", "@mlagent/sdk#build", "@mlagent/cli#build"]
+    },
+    "@mlagenthub/gmail#build": {
+      "inputs": ["integration.definition.ts", "src/**"],
+      "outputs": [".mlagent/**"],
+      "dependsOn": ["@mlagent/client#build", "@mlagent/sdk#build", "@mlagent/cli#build"]
+    },
+    "@mlagenthub/googlecalendar#build": {
+      "inputs": ["integration.definition.ts", "src/**"],
+      "outputs": [".mlagent/**"],
+      "dependsOn": ["@mlagent/client#build", "@mlagent/sdk#build", "@mlagent/cli#build"]
+    },
+    "@mlagenthub/groq#build": {
+      "inputs": ["integration.definition.ts", "src/**"],
+      "outputs": [".mlagent/**"],
+      "dependsOn": ["@mlagent/client#build", "@mlagent/sdk#build", "@mlagent/cli#build"]
+    },
+    "@mlagenthub/gsheets#build": {
+      "inputs": ["integration.definition.ts", "src/**"],
+      "outputs": [".mlagent/**"],
+      "dependsOn": ["@mlagent/client#build", "@mlagent/sdk#build", "@mlagent/cli#build"]
+    },
+    "@mlagenthub/instagram#build": {
+      "inputs": ["integration.definition.ts", "src/**"],
+      "outputs": [".mlagent/**"],
+      "dependsOn": ["@mlagent/client#build", "@mlagent/sdk#build", "@mlagent/cli#build"]
+    },
+    "@mlagenthub/intercom#build": {
+      "inputs": ["integration.definition.ts", "src/**"],
+      "outputs": [".mlagent/**"],
+      "dependsOn": ["@mlagent/client#build", "@mlagent/sdk#build", "@mlagent/cli#build"]
+    },
+    "@mlagenthub/line#build": {
+      "inputs": ["integration.definition.ts", "src/**"],
+      "outputs": [".mlagent/**"],
+      "dependsOn": ["@mlagent/client#build", "@mlagent/sdk#build", "@mlagent/cli#build"]
+    },
+    "@mlagenthub/linear#build": {
+      "inputs": ["integration.definition.ts", "src/**"],
+      "outputs": [".mlagent/**"],
+      "dependsOn": ["@mlagent/client#build", "@mlagent/sdk#build", "@mlagent/cli#build"]
+    },
+    "@mlagenthub/mailchimp#build": {
+      "inputs": ["integration.definition.ts", "src/**"],
+      "outputs": [".mlagent/**"],
+      "dependsOn": ["@mlagent/client#build", "@mlagent/sdk#build", "@mlagent/cli#build"]
+    },
+    "@mlagenthub/make#build": {
+      "inputs": ["integration.definition.ts", "src/**"],
+      "outputs": [".mlagent/**"],
+      "dependsOn": ["@mlagent/client#build", "@mlagent/sdk#build", "@mlagent/cli#build"]
+    },
+    "@mlagenthub/messenger#build": {
+      "inputs": ["integration.definition.ts", "src/**"],
+      "outputs": [".mlagent/**"],
+      "dependsOn": ["@mlagent/client#build", "@mlagent/sdk#build", "@mlagent/cli#build"]
+    },
+    "@mlagenthub/notion#build": {
+      "inputs": ["integration.definition.ts", "src/**"],
+      "outputs": [".mlagent/**"],
+      "dependsOn": ["@mlagent/client#build", "@mlagent/sdk#build", "@mlagent/cli#build"]
+    },
+    "@mlagenthub/openai#build": {
+      "inputs": ["integration.definition.ts", "src/**"],
+      "outputs": [".mlagent/**"],
+      "dependsOn": ["@mlagent/client#build", "@mlagent/sdk#build", "@mlagent/cli#build"]
+    },
+    "@mlagenthub/slack#build": {
+      "inputs": ["integration.definition.ts", "src/**"],
+      "outputs": [".mlagent/**"],
+      "dependsOn": ["@mlagent/client#build", "@mlagent/sdk#build", "@mlagent/cli#build"]
+    },
+    "@mlagenthub/stripe#build": {
+      "inputs": ["integration.definition.ts", "src/**"],
+      "outputs": [".mlagent/**"],
+      "dependsOn": ["@mlagent/client#build", "@mlagent/sdk#build", "@mlagent/cli#build"]
+    },
+    "@mlagenthub/sunco#build": {
+      "inputs": ["integration.definition.ts", "src/**"],
+      "outputs": [".mlagent/**"],
+      "dependsOn": ["@mlagent/client#build", "@mlagent/sdk#build", "@mlagent/cli#build"]
+    },
+    "@mlagenthub/teams#build": {
+      "inputs": ["integration.definition.ts", "src/**"],
+      "outputs": [".mlagent/**"],
+      "dependsOn": ["@mlagent/client#build", "@mlagent/sdk#build", "@mlagent/cli#build"]
+    },
+    "@mlagenthub/telegram#build": {
+      "inputs": ["integration.definition.ts", "src/**"],
+      "outputs": [".mlagent/**"],
+      "dependsOn": ["@mlagent/client#build", "@mlagent/sdk#build", "@mlagent/cli#build"]
+    },
+    "@mlagenthub/trello#build": {
+      "inputs": ["integration.definition.ts", "src/**"],
+      "outputs": [".mlagent/**"],
+      "dependsOn": ["@mlagent/client#build", "@mlagent/sdk#build", "@mlagent/cli#build"]
+    },
+    "@mlagenthub/twilio#build": {
+      "inputs": ["integration.definition.ts", "src/**"],
+      "outputs": [".mlagent/**"],
+      "dependsOn": ["@mlagent/client#build", "@mlagent/sdk#build", "@mlagent/cli#build"]
+    },
+    "@mlagenthub/viber#build": {
+      "inputs": ["integration.definition.ts", "src/**"],
+      "outputs": [".mlagent/**"],
+      "dependsOn": ["@mlagent/client#build", "@mlagent/sdk#build", "@mlagent/cli#build"]
+    },
+    "@mlagenthub/vonage#build": {
+      "inputs": ["integration.definition.ts", "src/**"],
+      "outputs": [".mlagent/**"],
+      "dependsOn": ["@mlagent/client#build", "@mlagent/sdk#build", "@mlagent/cli#build"]
+    },
+    "@mlagenthub/browser#build": {
+      "inputs": ["integration.definition.ts", "src/**"],
+      "outputs": [".mlagent/**"],
+      "dependsOn": ["@mlagent/client#build", "@mlagent/sdk#build", "@mlagent/cli#build"]
+    },
+    "@mlagenthub/webchat#build": {
+      "inputs": ["integration.definition.ts", "src/**"],
+      "outputs": [".mlagent/**"],
+      "dependsOn": ["@mlagent/client#build", "@mlagent/sdk#build", "@mlagent/cli#build"]
+    },
+    "@mlagenthub/webhook#build": {
+      "inputs": ["integration.definition.ts", "src/**"],
+      "outputs": [".mlagent/**"],
+      "dependsOn": ["@mlagent/client#build", "@mlagent/sdk#build", "@mlagent/cli#build"]
+    },
+    "@mlagenthub/whatsapp#build": {
+      "inputs": ["integration.definition.ts", "src/**"],
+      "outputs": [".mlagent/**"],
+      "dependsOn": ["@mlagent/client#build", "@mlagent/sdk#build", "@mlagent/cli#build"]
+    },
+    "@mlagenthub/zapier#build": {
+      "inputs": ["integration.definition.ts", "src/**"],
+      "outputs": [".mlagent/**"],
+      "dependsOn": ["@mlagent/client#build", "@mlagent/sdk#build", "@mlagent/cli#build"]
+    },
+    "@mlagenthub/zendesk#build": {
+      "inputs": ["integration.definition.ts", "src/**"],
+      "outputs": [".mlagent/**"],
+      "dependsOn": ["@mlagent/client#build", "@mlagent/sdk#build", "@mlagent/cli#build"]
+    },
+    "@bp-bots/bugbuster#integrations": {
+      "cache": false,
+      "dependsOn": [
+        "@mlagent/cli#build",
+        "@mlagenthub/linear#build",
+        "@mlagenthub/github#build",
+        "@mlagenthub/slack#build"
+      ]
+    },
+    "@bp-bots/bugbuster#build": {
+      "cache": false,
+      "dependsOn": [
+        "@bp-bots/bugbuster#integrations",
+        "@mlagent/client#build",
+        "@mlagent/sdk#build",
+        "@mlagent/cli#build"
+      ]
+    },
+    "@bp-bots/hello-world#build": {
+      "cache": false,
+      "dependsOn": ["@mlagent/client#build", "@mlagent/sdk#build", "@mlagent/cli#build"]
+    },
+    "@bp-bots/hit-looper#integrations": {
+      "cache": false,
+      "dependsOn": ["@mlagent/cli#build", "@mlagenthub/telegram#build", "@mlagenthub/zendesk#build"]
+    },
+    "@bp-bots/hit-looper#build": {
+      "cache": false,
+      "dependsOn": [
+        "@bp-bots/hit-looper#integrations",
+        "@mlagent/client#build",
+        "@mlagent/sdk#build",
+        "@mlagent/cli#build"
+      ]
+    },
+    "@bp-bots/sheetzy#integrations": {
+      "cache": false,
+      "dependsOn": ["@mlagent/cli#build", "@mlagenthub/telegram#build", "@mlagenthub/gsheets#build"]
+    },
+    "@bp-bots/sheetzy#build": {
+      "cache": false,
+      "dependsOn": [
+        "@bp-bots/sheetzy#integrations",
+        "@mlagent/client#build",
+        "@mlagent/sdk#build",
+        "@mlagent/cli#build"
+      ]
+    },
+    "@bp-bots/sinlin#integrations": {
+      "cache": false,
+      "dependsOn": ["@mlagent/cli#build", "@mlagenthub/telegram#build", "@mlagenthub/linear#build"]
+    },
+    "@bp-bots/sinlin#build": {
+      "cache": false,
+      "dependsOn": ["@bp-bots/sinlin#integrations", "@mlagent/client#build", "@mlagent/sdk#build", "@mlagent/cli#build"]
+    }
+  }
+}

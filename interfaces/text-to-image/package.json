@@ -1,0 +1,17 @@
+{
+  "name": "@mlagenthub/text-to-image",
+  "description": "Text-to-image interface for Mlagent integrations",
+  "private": true,
+  "scripts": {
+    "check:type": "tsc --noEmit",
+    "deploy": "pnpm bp deploy"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@mlagent/sdk": "workspace:*"
+  },
+  "devDependencies": {
+    "@mlagent/cli": "workspace:*",
+    "typescript": "^4.9.4"
+  }
+}

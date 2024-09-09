@@ -1,0 +1,17 @@
+{
+  "name": "@mlagenthub/hitl",
+  "description": "HITL interface for Mlagent",
+  "private": true,
+  "scripts": {
+    "check:type": "tsc --noEmit",
+    "deploy": "pnpm bp deploy"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@mlagent/sdk": "workspace:*"
+  },
+  "devDependencies": {
+    "@mlagent/cli": "workspace:*",
+    "typescript": "^4.9.4"
+  }
+}

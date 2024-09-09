@@ -1,0 +1,30 @@
+{
+  "name": "@mlagenthub/twilio",
+  "description": "Twilio integration for Mlagent",
+  "private": true,
+  "scripts": {
+    "start": "pnpm bp serve",
+    "build": "pnpm bp build",
+    "deploy": "pnpm bp deploy",
+    "check:type": "tsc --noEmit"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@mlagent/client": "workspace:*",
+    "@mlagent/sdk": "workspace:*",
+    "@mlagent/sdk-addons": "workspace:*",
+    "query-string": "^6.14.1",
+    "twilio": "^3.84.0"
+  },
+  "devDependencies": {
+    "@mlagent/cli": "workspace:*",
+    "@sentry/cli": "^2.18.1",
+    "@types/node": "^18.11.17",
+    "esbuild": "^0.15.18",
+    "nodemon": "^2.0.20",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.4"
+  }
+}

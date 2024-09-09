@@ -1,0 +1,25 @@
+{
+  "name": "@mlagenthub/googlecalendar",
+  "private": true,
+  "scripts": {
+    "start": "pnpm bp serve",
+    "build": "pnpm bp build",
+    "deploy": "pnpm bp deploy",
+    "check:type": "tsc --noEmit"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@mlagent/client": "workspace:*",
+    "@mlagent/sdk": "workspace:*",
+    "google-auth-library": "^9.0.0",
+    "googleapis": "^126.0.1"
+  },
+  "devDependencies": {
+    "@mlagent/cli": "workspace:*",
+    "@types/node": "^18.11.17",
+    "googleapis-common": "^7.0.1",
+    "typescript": "^4.9.4"
+  }
+}

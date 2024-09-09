@@ -1,0 +1,24 @@
+{
+  "name": "@mlagenthub/make",
+  "scripts": {
+    "start": "pnpm bp serve",
+    "build": "pnpm bp build",
+    "deploy": "pnpm bp deploy",
+    "check:type": "tsc --noEmit"
+  },
+  "keywords": [],
+  "private": true,
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@mlagent/client": "workspace:*",
+    "@mlagent/sdk": "workspace:*",
+    "axios": "^1.6.7"
+  },
+  "devDependencies": {
+    "@mlagent/cli": "workspace:*",
+    "@types/node": "^18.19.10",
+    "ts-node": "^10.9.2",
+    "typescript": "^4.9.5"
+  }
+}

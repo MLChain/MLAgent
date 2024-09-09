@@ -1,0 +1,13 @@
+packages/cli/dist/
+packages/cli/node_modules/
+packages/cli/**/.mlagent/
+packages/client/dist/
+packages/client/node_modules/
+packages/sdk/dist/
+packages/sdk/node_modules/
+bots/**/dist/
+bots/**/node_modules/
+bots/**/.mlagent/
+integrations/**/dist/
+integrations/**/node_modules/
+integrations/**/.mlagent/

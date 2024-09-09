@@ -1,0 +1,23 @@
+name: Run Checks
+
+on: pull_request
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  run-checks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      NODE_OPTIONS: '--max_old_space_size=8192'
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup
+        uses: ./.github/actions/setup
+      - run: pnpm run check:format
+      - run: pnpm run check:lint
+      - run: pnpm run check:type
+      - run: pnpm run check:dep
+      - run: pnpm run test
